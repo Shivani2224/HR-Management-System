@@ -174,7 +174,6 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
             <div className="profile-divider"></div>
             <a onClick={() => handleNavigate('profile')}>My Profile</a>
             <a onClick={() => handleNavigate('settings')}>Settings</a>
-            <a href="#help">Help & Support</a>
             <div className="profile-divider"></div>
             <button className="logout-btn" onClick={onLogout}>
               Logout
