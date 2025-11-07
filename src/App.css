@@ -1,0 +1,353 @@
+.App {
+  min-height: 100vh;
+}
+
+.App:has(.main-content) {
+  background: #f5f6fa;
+}
+
+.App:not(:has(.main-content)) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.main-content {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 400px;
+}
+
+.dashboard h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.dashboard p {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background: #1a1a2e;
+  color: #e0e0e0;
+}
+
+body.dark-mode .App:has(.main-content) {
+  background: #16213e;
+}
+
+body.dark-mode .main-content {
+  background: #16213e;
+}
+
+body.dark-mode .dashboard {
+  background: #0f3460;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .dashboard h2 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .dashboard p {
+  color: #b0b0b0;
+}
+
+/* Dark Mode - Common elements */
+body.dark-mode .employee-dashboard,
+body.dark-mode .leave-request-container,
+body.dark-mode .leave-approval-container,
+body.dark-mode .attendance-container,
+body.dark-mode .payslips-container,
+body.dark-mode .profile-container,
+body.dark-mode .correction-container,
+body.dark-mode .correction-approval-container {
+  background: #0f3460;
+  color: #e0e0e0;
+}
+
+body.dark-mode .time-card,
+body.dark-mode .leave-balance-section,
+body.dark-mode .profile-info-section,
+body.dark-mode .password-change-section,
+body.dark-mode .request-form,
+body.dark-mode .stats-grid,
+body.dark-mode .attendance-table,
+body.dark-mode .payslip-card,
+body.dark-mode .correction-form,
+body.dark-mode .approval-request-card {
+  background: #16213e;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .field-value,
+body.dark-mode .form-field input,
+body.dark-mode .form-field textarea,
+body.dark-mode .form-field select {
+  background: #0f3460;
+  color: #e0e0e0;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .form-field input::placeholder,
+body.dark-mode .form-field textarea::placeholder {
+  color: #7a7a7a;
+}
+
+body.dark-mode .form-field label {
+  color: #b0b0b0;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: #e0e0e0;
+}
+
+body.dark-mode p {
+  color: #b0b0b0;
+}
+
+body.dark-mode .table-header {
+  background: linear-gradient(135deg, #4a5899 0%, #5a4876 100%);
+}
+
+body.dark-mode .table-row,
+body.dark-mode .history-row,
+body.dark-mode .request-card,
+body.dark-mode .payslip-item {
+  background: #16213e;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .table-row:hover,
+body.dark-mode .history-row:hover {
+  background: #1f2f4f;
+}
+
+body.dark-mode .dropdown-menu {
+  background: #0f3460;
+  border: 1px solid #2a3f5f;
+}
+
+body.dark-mode .dropdown-menu a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .dropdown-menu a:hover {
+  background: #16213e;
+}
+
+body.dark-mode .profile-dropdown {
+  background: #0f3460;
+  border: 1px solid #2a3f5f;
+}
+
+body.dark-mode .profile-header {
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .info-label,
+body.dark-mode .label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .info-value,
+body.dark-mode .value {
+  color: #e0e0e0;
+}
+
+body.dark-mode .session-summary {
+  background: #1a3a5a;
+  border-color: #2a5f8f;
+}
+
+body.dark-mode .summary-item {
+  background: #0f3460;
+}
+
+body.dark-mode .login-history {
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .history-table {
+  background: #16213e;
+  border-color: #2a3f5f;
+}
+
+/* Dark Mode - Filter tabs */
+body.dark-mode .filter-tabs {
+  background: #16213e;
+}
+
+body.dark-mode .filter-tab {
+  border-color: #2a3f5f;
+  color: #b0b0b0;
+}
+
+body.dark-mode .filter-tab:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+/* Dark Mode - Status badges */
+body.dark-mode .status-badge.pending {
+  background: #3d3400;
+  color: #ffc107;
+}
+
+body.dark-mode .status-badge.approved {
+  background: #1a3d2e;
+  color: #4caf50;
+}
+
+body.dark-mode .status-badge.rejected {
+  background: #3d1a1a;
+  color: #f44336;
+}
+
+/* Dark Mode - Alerts */
+body.dark-mode .password-error {
+  background: #3d1a1a;
+  border-color: #dc3545;
+}
+
+body.dark-mode .password-success {
+  background: #1a3d2e;
+  border-color: #28a745;
+}
+
+/* Dark Mode - Admin Dashboard */
+body.dark-mode .admin-dashboard {
+  background: #16213e;
+}
+
+body.dark-mode .stat-card,
+body.dark-mode .action-card,
+body.dark-mode .activity-section,
+body.dark-mode .top-employees-section {
+  background: #0f3460;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .stat-value,
+body.dark-mode .action-title,
+body.dark-mode .activity-user,
+body.dark-mode .employee-name {
+  color: #e0e0e0;
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .action-description,
+body.dark-mode .activity-action,
+body.dark-mode .employee-role {
+  color: #b0b0b0;
+}
+
+body.dark-mode .activity-item,
+body.dark-mode .employee-item {
+  background: #16213e;
+}
+
+body.dark-mode .activity-item:hover,
+body.dark-mode .employee-item:hover {
+  background: #1f2f4f;
+}
+
+body.dark-mode .action-card:hover {
+  border-color: #667eea;
+  background: #16213e;
+}
+
+/* Dark Mode - User Management & Employee Directory */
+body.dark-mode .user-management-container,
+body.dark-mode .employee-directory-container,
+body.dark-mode .reports-container,
+body.dark-mode .settings-container {
+  background: #16213e;
+}
+
+body.dark-mode .filters-section,
+body.dark-mode .users-table,
+body.dark-mode .employee-card,
+body.dark-mode .settings-section,
+body.dark-mode .report-controls,
+body.dark-mode .report-content {
+  background: #0f3460;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .search-box input,
+body.dark-mode .role-filter select,
+body.dark-mode .setting-item input,
+body.dark-mode .setting-item select,
+body.dark-mode .holiday-add-section input {
+  background: #16213e;
+  color: #e0e0e0;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .employee-card .card-body,
+body.dark-mode .employee-card .card-footer {
+  background: #0f3460;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .holiday-item,
+body.dark-mode .report-table .table-row {
+  background: #16213e;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .holiday-item:hover,
+body.dark-mode .report-table .table-row:hover {
+  background: #1f2f4f;
+}
+
+body.dark-mode .modal-content {
+  background: #0f3460;
+}
+
+body.dark-mode .modal-header {
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .employee-profile-section {
+  background: linear-gradient(135deg, #4a5899 0%, #5a4876 100%);
+}
+
+body.dark-mode .detail-section {
+  background: #16213e;
+}
+
+body.dark-mode .detail-item {
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .save-message {
+  background: #1a3d2e;
+  border-color: #28a745;
+}
+
+body.dark-mode .no-holidays,
+body.dark-mode .no-data,
+body.dark-mode .no-users,
+body.dark-mode .no-employees {
+  background: #16213e;
+  color: #666;
+}
