@@ -142,8 +142,6 @@ body.dark-mode .login-box h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 30px rgba(131, 197, 190, 0.3);
-  filter: drop-shadow(0 0 20px rgba(131, 197, 190, 0.4));
 }
 
 body.dark-mode .form-group label {
