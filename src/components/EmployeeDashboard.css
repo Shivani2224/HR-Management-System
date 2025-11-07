@@ -268,6 +268,46 @@
   font-family: 'Courier New', monospace;
 }
 
+/* Dark Mode Styles for History Table */
+body.dark-mode .login-history h3 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .history-table {
+  background: #16213e;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .table-header {
+  background: linear-gradient(135deg, #006d77 0%, #004d56 100%);
+  color: #ffffff;
+}
+
+body.dark-mode .table-row {
+  background: #16213e;
+  border-bottom-color: #2a3f5f;
+}
+
+body.dark-mode .table-row:hover {
+  background: #1f2f4f;
+}
+
+body.dark-mode .table-row .col {
+  color: #b0b0b0;
+}
+
+body.dark-mode .table-row .col.date {
+  color: #e0e0e0;
+}
+
+body.dark-mode .table-row .col.work-time {
+  color: #4caf50;
+}
+
+body.dark-mode .table-row .col.break-time {
+  color: #ffa726;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .dashboard-header,

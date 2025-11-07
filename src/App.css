@@ -123,6 +123,39 @@ body.dark-mode p {
   color: #b0b0b0;
 }
 
+/* Dark Mode - Fix all text visibility */
+body.dark-mode .col,
+body.dark-mode .stat-label,
+body.dark-mode .stat-value,
+body.dark-mode .filter-group label,
+body.dark-mode .attendance-header h1,
+body.dark-mode .attendance-header p,
+body.dark-mode .record-info,
+body.dark-mode .detail-label,
+body.dark-mode .detail-value,
+body.dark-mode .correction-detail strong,
+body.dark-mode .summary-item .label,
+body.dark-mode .summary-item .value {
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .stat-label {
+  color: #b0b0b0 !important;
+}
+
+body.dark-mode .col.date {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+body.dark-mode .col.work-time {
+  color: #4caf50 !important;
+}
+
+body.dark-mode .col.break-time {
+  color: #ffa726 !important;
+}
+
 body.dark-mode .table-header {
   background: linear-gradient(135deg, #006d77 0%, #004d56 100%);
 }
