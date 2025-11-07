@@ -77,12 +77,6 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
                   Payslips
                 </a>
                 <a
-                  onClick={() => handleNavigate('profile')}
-                  className={currentView === 'profile' ? 'active' : ''}
-                >
-                  My Profile
-                </a>
-                <a
                   onClick={() => handleNavigate('settings')}
                   className={currentView === 'settings' ? 'active' : ''}
                 >
@@ -190,8 +184,8 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
               </div>
             </div>
             <div className="profile-divider"></div>
-            <a href="#profile">My Profile</a>
-            <a href="#settings">Settings</a>
+            <a onClick={() => handleNavigate('profile')}>My Profile</a>
+            <a onClick={() => handleNavigate('settings')}>Settings</a>
             <a href="#help">Help & Support</a>
             <div className="profile-divider"></div>
             <button className="logout-btn" onClick={onLogout}>

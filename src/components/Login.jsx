@@ -34,6 +34,8 @@ function Login({ onLogin }) {
     const user = users.find(u => u.email === email && u.password === password)
 
     if (user) {
+      // Store current user for password change functionality
+      localStorage.setItem('currentUser', JSON.stringify({ email: user.email, name: user.name, role: user.role }))
       onLogin(user.name, user.role)
     } else {
       setError('Invalid email or password')

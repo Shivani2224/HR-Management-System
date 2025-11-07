@@ -28,6 +28,14 @@ function Settings() {
 
   const [saveMessage, setSaveMessage] = useState('')
 
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  })
+
+  const [passwordMessage, setPasswordMessage] = useState({ type: '', text: '' })
+
   useEffect(() => {
     loadSettings()
   }, [])
@@ -132,6 +140,61 @@ function Settings() {
     a.click()
     document.body.removeChild(a)
     window.URL.revokeObjectURL(url)
+  }
+
+  const handlePasswordChange = () => {
+    // Validation
+    if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+      setPasswordMessage({ type: 'error', text: 'Please fill in all password fields' })
+      setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
+      return
+    }
+
+    if (passwordData.newPassword.length < 6) {
+      setPasswordMessage({ type: 'error', text: 'New password must be at least 6 characters long' })
+      setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
+      return
+    }
+
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordMessage({ type: 'error', text: 'New passwords do not match' })
+      setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
+      return
+    }
+
+    // Get current user from localStorage (you'll need to pass username as prop)
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}')
+    const users = JSON.parse(localStorage.getItem('systemUsers') || '[]')
+
+    // Find user
+    const userIndex = users.findIndex(u => u.email === currentUser.email)
+
+    if (userIndex === -1) {
+      setPasswordMessage({ type: 'error', text: 'User not found' })
+      setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
+      return
+    }
+
+    // Verify current password
+    if (users[userIndex].password !== passwordData.currentPassword) {
+      setPasswordMessage({ type: 'error', text: 'Current password is incorrect' })
+      setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
+      return
+    }
+
+    // Update password
+    users[userIndex].password = passwordData.newPassword
+    localStorage.setItem('systemUsers', JSON.stringify(users))
+
+    // Clear form
+    setPasswordData({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    })
+
+    setPasswordMessage({ type: 'success', text: 'Password changed successfully!' })
+    setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
   }
 
   return (
@@ -329,6 +392,48 @@ function Settings() {
             ))
           )}
         </div>
+      </div>
+
+      {/* Password Change Section */}
+      <div className="settings-section full-width">
+        <h2>🔐 Change Password</h2>
+        {passwordMessage.text && (
+          <div className={`password-message ${passwordMessage.type}`}>
+            {passwordMessage.text}
+          </div>
+        )}
+        <div className="password-change-grid">
+          <div className="setting-item">
+            <label>Current Password</label>
+            <input
+              type="password"
+              value={passwordData.currentPassword}
+              onChange={(e) => setPasswordData(prev => ({ ...prev, currentPassword: e.target.value }))}
+              placeholder="Enter current password"
+            />
+          </div>
+          <div className="setting-item">
+            <label>New Password</label>
+            <input
+              type="password"
+              value={passwordData.newPassword}
+              onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
+              placeholder="Enter new password (min 6 characters)"
+            />
+          </div>
+          <div className="setting-item">
+            <label>Confirm New Password</label>
+            <input
+              type="password"
+              value={passwordData.confirmPassword}
+              onChange={(e) => setPasswordData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+              placeholder="Confirm new password"
+            />
+          </div>
+        </div>
+        <button className="btn-change-password" onClick={handlePasswordChange}>
+          🔒 Change Password
+        </button>
       </div>
 
       {/* Save Button */}
