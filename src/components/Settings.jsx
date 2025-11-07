@@ -28,28 +28,9 @@ function Settings({ userRole }) {
 
   const [saveMessage, setSaveMessage] = useState('')
 
-  const [manualHoursData, setManualHoursData] = useState({
-    employee: '',
-    date: '',
-    loginTime: '',
-    logoutTime: '',
-    breakHours: 0,
-    breakMinutes: 0
-  })
-
-  const [manualHoursMessage, setManualHoursMessage] = useState({ type: '', text: '' })
-  const [employees, setEmployees] = useState([])
-
   useEffect(() => {
     loadSettings()
-    loadEmployees()
   }, [])
-
-  const loadEmployees = () => {
-    const users = JSON.parse(localStorage.getItem('systemUsers') || '[]')
-    const employeeList = users.filter(u => u.role === 'employee' || u.role === 'manager')
-    setEmployees(employeeList)
-  }
 
   const loadSettings = () => {
     const savedSettings = localStorage.getItem('systemSettings')
@@ -151,99 +132,6 @@ function Settings({ userRole }) {
     a.click()
     document.body.removeChild(a)
     window.URL.revokeObjectURL(url)
-  }
-
-  const handleAddManualHours = () => {
-    setManualHoursMessage({ type: '', text: '' })
-
-    // Validation
-    if (!manualHoursData.employee) {
-      setManualHoursMessage({ type: 'error', text: 'Please select an employee' })
-      setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
-      return
-    }
-
-    if (!manualHoursData.date) {
-      setManualHoursMessage({ type: 'error', text: 'Please select a date' })
-      setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
-      return
-    }
-
-    if (!manualHoursData.loginTime || !manualHoursData.logoutTime) {
-      setManualHoursMessage({ type: 'error', text: 'Please enter both login and logout times' })
-      setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
-      return
-    }
-
-    // Create timestamps from date and time
-    const loginDateTime = new Date(`${manualHoursData.date}T${manualHoursData.loginTime}`)
-    const logoutDateTime = new Date(`${manualHoursData.date}T${manualHoursData.logoutTime}`)
-
-    if (logoutDateTime <= loginDateTime) {
-      setManualHoursMessage({ type: 'error', text: 'Logout time must be after login time' })
-      setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
-      return
-    }
-
-    const loginTime = loginDateTime.getTime()
-    const logoutTime = logoutDateTime.getTime()
-
-    // Calculate break time in milliseconds
-    const breakMs = (manualHoursData.breakHours * 60 * 60 * 1000) + (manualHoursData.breakMinutes * 60 * 1000)
-
-    // Calculate work time
-    const totalTime = logoutTime - loginTime
-    const workMs = totalTime - breakMs
-
-    if (workMs < 0) {
-      setManualHoursMessage({ type: 'error', text: 'Break time cannot exceed total time' })
-      setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
-      return
-    }
-
-    // Format work time
-    const workHours = Math.floor(workMs / (1000 * 60 * 60))
-    const workMinutes = Math.floor((workMs % (1000 * 60 * 60)) / (1000 * 60))
-    const workSeconds = Math.floor((workMs % (1000 * 60)) / 1000)
-
-    // Format break time
-    const breakHours = Math.floor(breakMs / (1000 * 60 * 60))
-    const breakMinutes = Math.floor((breakMs % (1000 * 60 * 60)) / (1000 * 60))
-    const breakSeconds = Math.floor((breakMs % (1000 * 60)) / 1000)
-
-    // Create attendance record
-    const attendanceRecord = {
-      id: Date.now(),
-      username: manualHoursData.employee,
-      userRole: employees.find(e => e.name === manualHoursData.employee)?.role || 'employee',
-      loginTime: loginTime,
-      logoutTime: logoutTime,
-      totalWorkedMs: workMs,
-      totalBreakMs: breakMs,
-      totalWorked: `${workHours}h ${workMinutes}m ${workSeconds}s`,
-      totalBreak: `${breakHours}h ${breakMinutes}m ${breakSeconds}s`,
-      date: manualHoursData.date,
-      manualEntry: true,
-      addedBy: userRole
-    }
-
-    // Save to employee's attendance history
-    const attendanceHistory = JSON.parse(localStorage.getItem(`attendance_${manualHoursData.employee}`) || '[]')
-    attendanceHistory.unshift(attendanceRecord)
-    localStorage.setItem(`attendance_${manualHoursData.employee}`, JSON.stringify(attendanceHistory))
-
-    // Clear form
-    setManualHoursData({
-      employee: '',
-      date: '',
-      loginTime: '',
-      logoutTime: '',
-      breakHours: 0,
-      breakMinutes: 0
-    })
-
-    setManualHoursMessage({ type: 'success', text: `Working hours added successfully for ${manualHoursData.employee}!` })
-    setTimeout(() => setManualHoursMessage({ type: '', text: '' }), 3000)
   }
 
   // Check if user is employee
@@ -541,94 +429,6 @@ function Settings({ userRole }) {
             ))
           )}
         </div>
-      </div>
-
-      {/* Manual Working Hours Entry */}
-      <div className="settings-section full-width">
-        <h2>⏰ Add Employee Working Hours</h2>
-        <p className="section-description">Manually add attendance record for employees who forgot to clock in/out</p>
-
-        {manualHoursMessage.text && (
-          <div className={`password-message ${manualHoursMessage.type}`}>
-            {manualHoursMessage.text}
-          </div>
-        )}
-
-        <div className="manual-hours-grid">
-          <div className="setting-item">
-            <label>Select Employee</label>
-            <select
-              value={manualHoursData.employee}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, employee: e.target.value }))}
-            >
-              <option value="">-- Select Employee --</option>
-              {employees.map((emp, index) => (
-                <option key={index} value={emp.name}>
-                  {emp.name} ({emp.role})
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="setting-item">
-            <label>Date</label>
-            <input
-              type="date"
-              value={manualHoursData.date}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, date: e.target.value }))}
-            />
-          </div>
-
-          <div className="setting-item">
-            <label>Login Time</label>
-            <input
-              type="time"
-              value={manualHoursData.loginTime}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, loginTime: e.target.value }))}
-            />
-          </div>
-
-          <div className="setting-item">
-            <label>Logout Time</label>
-            <input
-              type="time"
-              value={manualHoursData.logoutTime}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, logoutTime: e.target.value }))}
-            />
-          </div>
-
-          <div className="setting-item">
-            <label>Break Hours</label>
-            <input
-              type="number"
-              min="0"
-              max="8"
-              value={manualHoursData.breakHours}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, breakHours: parseInt(e.target.value) || 0 }))}
-            />
-          </div>
-
-          <div className="setting-item">
-            <label>Break Minutes</label>
-            <input
-              type="number"
-              min="0"
-              max="59"
-              step="1"
-              value={manualHoursData.breakMinutes}
-              onChange={(e) => setManualHoursData(prev => ({ ...prev, breakMinutes: parseInt(e.target.value) || 0 }))}
-            />
-          </div>
-        </div>
-
-        <div className="manual-hours-info">
-          <p>ℹ️ This will add an attendance record to the selected employee's history</p>
-          <p>📝 Total break time: {manualHoursData.breakHours}h {manualHoursData.breakMinutes}m</p>
-        </div>
-
-        <button className="btn-add-manual-hours" onClick={handleAddManualHours}>
-          ➕ Add Working Hours
-        </button>
       </div>
         </>
       )}
