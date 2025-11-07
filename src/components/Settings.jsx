@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Settings.css'
 
-function Settings() {
+function Settings({ userRole }) {
   const [settings, setSettings] = useState({
     companyName: 'HR System',
     workingHours: {
@@ -197,28 +197,35 @@ function Settings() {
     setTimeout(() => setPasswordMessage({ type: '', text: '' }), 3000)
   }
 
+  // Check if user is employee
+  const isEmployee = userRole === 'employee'
+
   return (
     <div className="settings-container">
       <div className="settings-header">
         <div>
-          <h1>System Settings</h1>
-          <p>Configure system preferences and policies</p>
+          <h1>{isEmployee ? 'My Settings' : 'System Settings'}</h1>
+          <p>{isEmployee ? 'Manage your personal settings' : 'Configure system preferences and policies'}</p>
         </div>
-        <div className="header-actions">
-          <button className="btn-export" onClick={handleExportData}>
-            📥 Export Data
-          </button>
-          <button className="btn-reset" onClick={handleResetSettings}>
-            🔄 Reset to Default
-          </button>
-        </div>
+        {!isEmployee && (
+          <div className="header-actions">
+            <button className="btn-export" onClick={handleExportData}>
+              📥 Export Data
+            </button>
+            <button className="btn-reset" onClick={handleResetSettings}>
+              🔄 Reset to Default
+            </button>
+          </div>
+        )}
       </div>
 
-      {saveMessage && (
+      {saveMessage && !isEmployee && (
         <div className="save-message">{saveMessage}</div>
       )}
 
-      <div className="settings-grid">
+      {!isEmployee && (
+        <>
+        <div className="settings-grid">
         {/* Company Settings */}
         <div className="settings-section">
           <h2>Company Settings</h2>
@@ -393,8 +400,10 @@ function Settings() {
           )}
         </div>
       </div>
+        </>
+      )}
 
-      {/* Password Change Section */}
+      {/* Password Change Section - Available for All Users */}
       <div className="settings-section full-width">
         <h2>🔐 Change Password</h2>
         {passwordMessage.text && (
@@ -436,12 +445,14 @@ function Settings() {
         </button>
       </div>
 
-      {/* Save Button */}
-      <div className="settings-footer">
-        <button className="btn-save-settings" onClick={handleSaveSettings}>
-          💾 Save All Settings
-        </button>
-      </div>
+      {/* Save Button - Only for Admin/Manager */}
+      {!isEmployee && (
+        <div className="settings-footer">
+          <button className="btn-save-settings" onClick={handleSaveSettings}>
+            💾 Save All Settings
+          </button>
+        </div>
+      )}
     </div>
   )
 }
