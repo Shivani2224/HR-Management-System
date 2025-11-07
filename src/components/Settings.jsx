@@ -200,12 +200,22 @@ function Settings({ userRole }) {
   // Check if user is employee
   const isEmployee = userRole === 'employee'
 
+  // Get remaining leaves for employee
+  const getRemainingLeaves = () => {
+    return {
+      vacation: settings.leavePolicies.vacation,
+      sick: settings.leavePolicies.sick,
+      personal: settings.leavePolicies.personal,
+      total: settings.leavePolicies.vacation + settings.leavePolicies.sick + settings.leavePolicies.personal
+    }
+  }
+
   return (
     <div className="settings-container">
       <div className="settings-header">
         <div>
           <h1>{isEmployee ? 'My Settings' : 'System Settings'}</h1>
-          <p>{isEmployee ? 'Manage your personal settings' : 'Configure system preferences and policies'}</p>
+          <p>{isEmployee ? 'View company information and manage your password' : 'Configure system preferences and policies'}</p>
         </div>
         {!isEmployee && (
           <div className="header-actions">
@@ -221,6 +231,89 @@ function Settings({ userRole }) {
 
       {saveMessage && !isEmployee && (
         <div className="save-message">{saveMessage}</div>
+      )}
+
+      {/* Employee Read-Only Sections */}
+      {isEmployee && (
+        <>
+          <div className="settings-grid">
+            {/* Working Hours - Read Only */}
+            <div className="settings-section readonly">
+              <h2>⏰ Working Hours</h2>
+              <div className="info-display">
+                <div className="info-item">
+                  <span className="info-label">Start Time</span>
+                  <span className="info-value">{settings.workingHours.start}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">End Time</span>
+                  <span className="info-value">{settings.workingHours.end}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Remaining Leaves - Read Only */}
+            <div className="settings-section readonly">
+              <h2>📅 Annual Leave Balance</h2>
+              <div className="leave-balance-grid">
+                <div className="leave-balance-item vacation">
+                  <div className="leave-icon">🏖️</div>
+                  <div className="leave-info">
+                    <span className="leave-label">Vacation Days</span>
+                    <span className="leave-value">{getRemainingLeaves().vacation} days</span>
+                  </div>
+                </div>
+                <div className="leave-balance-item sick">
+                  <div className="leave-icon">🏥</div>
+                  <div className="leave-info">
+                    <span className="leave-label">Sick Leave</span>
+                    <span className="leave-value">{getRemainingLeaves().sick} days</span>
+                  </div>
+                </div>
+                <div className="leave-balance-item personal">
+                  <div className="leave-icon">👤</div>
+                  <div className="leave-info">
+                    <span className="leave-label">Personal Days</span>
+                    <span className="leave-value">{getRemainingLeaves().personal} days</span>
+                  </div>
+                </div>
+                <div className="leave-balance-item total">
+                  <div className="leave-icon">📊</div>
+                  <div className="leave-info">
+                    <span className="leave-label">Total Available</span>
+                    <span className="leave-value">{getRemainingLeaves().total} days</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Company Holidays - Read Only */}
+          <div className="settings-section full-width readonly">
+            <h2>🏖️ Company Holidays</h2>
+            <div className="holidays-list">
+              {settings.holidays.length === 0 ? (
+                <div className="no-holidays">No holidays scheduled yet</div>
+              ) : (
+                settings.holidays.map((holiday, index) => (
+                  <div key={index} className="holiday-item readonly">
+                    <div className="holiday-info">
+                      <span className="holiday-name">{holiday.name}</span>
+                      <span className="holiday-date">
+                        {new Date(holiday.date).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </>
       )}
 
       {!isEmployee && (
