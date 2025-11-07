@@ -76,12 +76,6 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
                 >
                   Payslips
                 </a>
-                <a
-                  onClick={() => handleNavigate('settings')}
-                  className={currentView === 'settings' ? 'active' : ''}
-                >
-                  Settings
-                </a>
               </>
             )}
             {user.role === 'manager' && (
@@ -137,12 +131,6 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
                   className={currentView === 'reports' ? 'active' : ''}
                 >
                   Reports
-                </a>
-                <a
-                  onClick={() => handleNavigate('settings')}
-                  className={currentView === 'settings' ? 'active' : ''}
-                >
-                  Settings
                 </a>
                 <a
                   onClick={() => handleNavigate('users')}
