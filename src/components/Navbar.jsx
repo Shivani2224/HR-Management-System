@@ -82,6 +82,12 @@ function Navbar({ user, onLogout, onNavigate, currentView, darkMode, toggleDarkM
                 >
                   My Profile
                 </a>
+                <a
+                  onClick={() => handleNavigate('settings')}
+                  className={currentView === 'settings' ? 'active' : ''}
+                >
+                  Settings
+                </a>
               </>
             )}
             {user.role === 'manager' && (

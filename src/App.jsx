@@ -76,6 +76,7 @@ function App() {
                 {currentView === 'time-correction' && <TimeCorrection username={user.username} userRole={user.role} />}
                 {currentView === 'payslips' && <Payslips username={user.username} userRole={user.role} />}
                 {currentView === 'profile' && <Profile username={user.username} userRole={user.role} />}
+                {currentView === 'settings' && <Settings />}
               </>
             )}
             {user.role === 'manager' && (
@@ -90,6 +91,7 @@ function App() {
                 {currentView === 'profile' && <Profile username={user.username} userRole={user.role} />}
                 {currentView === 'employees' && <EmployeeDirectory />}
                 {currentView === 'reports' && <Reports />}
+                {currentView === 'settings' && <Settings />}
               </>
             )}
             {user.role === 'admin' && (
