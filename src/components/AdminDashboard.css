@@ -47,7 +47,7 @@
 }
 
 .stat-card.primary {
-  border-color: #667eea;
+  border-color: #006d77;
 }
 
 .stat-card.success {
@@ -126,7 +126,7 @@
 }
 
 .action-card:hover {
-  border-color: #667eea;
+  border-color: #006d77;
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
 }
@@ -220,7 +220,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -303,7 +303,7 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   display: flex;
   align-items: center;

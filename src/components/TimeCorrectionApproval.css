@@ -48,13 +48,13 @@
 }
 
 .filter-tab:hover {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #006d77;
+  color: #006d77;
   transform: translateY(-2px);
 }
 
 .filter-tab.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   border-color: transparent;
 }
@@ -124,7 +124,7 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -232,7 +232,7 @@
 }
 
 .comparison-section.requested h4 {
-  color: #667eea;
+  color: #006d77;
 }
 
 .time-details {
@@ -274,7 +274,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  color: #667eea;
+  color: #006d77;
   font-weight: bold;
 }
 
@@ -282,7 +282,7 @@
   background: #e8f4f8;
   padding: 15px;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #006d77;
 }
 
 .reason-text {

@@ -94,7 +94,7 @@
 }
 
 .summary-row.net {
-  border-top: 2px solid #667eea;
+  border-top: 2px solid #006d77;
   padding-top: 15px;
   margin-top: 10px;
 }
@@ -113,7 +113,7 @@
 }
 
 .summary-row.net .summary-value {
-  color: #667eea;
+  color: #006d77;
   font-size: 20px;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .view-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
 }
 
@@ -224,7 +224,7 @@
 
 .payslip-detail-header h3 {
   font-size: 18px;
-  color: #667eea;
+  color: #006d77;
 }
 
 .employee-info-section {
@@ -293,7 +293,7 @@
 }
 
 .net-salary-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   padding: 20px;
   border-radius: 8px;

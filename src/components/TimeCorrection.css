@@ -109,7 +109,7 @@
 
 .form-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #006d77;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -135,7 +135,7 @@ textarea.form-input {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
 }
 
@@ -189,7 +189,7 @@ textarea.form-input {
 }
 
 .records-table thead {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
 }
 
 .records-table th {
@@ -226,7 +226,7 @@ textarea.form-input {
 
 .correct-btn {
   padding: 8px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   border: none;
   border-radius: 6px;
@@ -257,7 +257,7 @@ textarea.form-input {
 }
 
 .request-card:hover {
-  border-color: #667eea;
+  border-color: #006d77;
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
 }
 
@@ -333,7 +333,7 @@ textarea.form-input {
 
 .arrow {
   font-size: 24px;
-  color: #667eea;
+  color: #006d77;
   font-weight: bold;
 }
 
@@ -341,7 +341,7 @@ textarea.form-input {
   background: #e8f4f8;
   padding: 15px;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #006d77;
   font-size: 14px;
   line-height: 1.6;
 }

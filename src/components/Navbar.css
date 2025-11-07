@@ -1,5 +1,5 @@
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   padding: 0 30px;
   height: 70px;
@@ -81,17 +81,17 @@
 
 .dropdown-menu a:hover {
   background: #f8f9fa;
-  color: #667eea;
+  color: #006d77;
 }
 
 .dropdown-menu a.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   font-weight: 600;
 }
 
 .dropdown-menu a.active:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
 }
 
@@ -142,7 +142,7 @@
   height: 40px;
   border-radius: 50%;
   background: white;
-  color: #667eea;
+  color: #006d77;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,7 +196,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -233,7 +233,7 @@
 
 .profile-dropdown a:hover {
   background: #f8f9fa;
-  color: #667eea;
+  color: #006d77;
 }
 
 .logout-btn {

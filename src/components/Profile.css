@@ -62,7 +62,7 @@
 }
 
 .balance-card.vacation {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
 }
 
@@ -127,7 +127,7 @@
 
 .edit-btn {
   padding: 10px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -227,7 +227,7 @@
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #006d77;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -247,7 +247,7 @@
 }
 
 .role-badge {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   padding: 6px 14px;
   border-radius: 20px;
@@ -290,7 +290,7 @@
 
 .change-password-btn {
   padding: 12px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   border: none;
   border-radius: 8px;

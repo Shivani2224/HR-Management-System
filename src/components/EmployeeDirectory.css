@@ -47,7 +47,7 @@
 
 .search-box input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #006d77;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
@@ -74,7 +74,7 @@
 
 .role-filter select:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #006d77;
 }
 
 .employee-count {
@@ -113,7 +113,7 @@
 }
 
 .card-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   padding: 30px 20px 20px;
   display: flex;
   flex-direction: column;
@@ -126,7 +126,7 @@
   height: 80px;
   border-radius: 50%;
   background: white;
-  color: #667eea;
+  color: #006d77;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,7 +201,7 @@
 .stat-item .stat-value {
   font-size: 24px;
   font-weight: 700;
-  color: #667eea;
+  color: #006d77;
   margin-bottom: 5px;
 }
 
@@ -221,7 +221,7 @@
 .btn-view-details {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -325,7 +325,7 @@
   align-items: center;
   gap: 20px;
   padding: 25px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
   border-radius: 12px;
   margin-bottom: 30px;
   color: white;
@@ -336,7 +336,7 @@
   height: 100px;
   border-radius: 50%;
   background: white;
-  color: #667eea;
+  color: #006d77;
   display: flex;
   align-items: center;
   justify-content: center;
