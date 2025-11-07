@@ -363,3 +363,95 @@
     max-width: 100%;
   }
 }
+
+/* Dark Mode Styles */
+body.dark-mode .profile-container {
+  background: transparent;
+}
+
+body.dark-mode .profile-header h1 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .profile-header p {
+  color: #b0b0b0;
+}
+
+body.dark-mode .leave-balance-section,
+body.dark-mode .profile-info-section,
+body.dark-mode .password-change-section {
+  background: #0f3460;
+  border-color: #2a3f5f;
+}
+
+body.dark-mode .leave-balance-section h2,
+body.dark-mode .section-header h2,
+body.dark-mode .form-section h3 {
+  color: #e0e0e0;
+  border-bottom-color: #2a3f5f;
+}
+
+body.dark-mode .section-header {
+  border-bottom-color: #2a3f5f;
+}
+
+body.dark-mode .form-field label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .form-field input,
+body.dark-mode .form-field textarea {
+  background: #16213e;
+  border-color: #2a3f5f;
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-field input::placeholder,
+body.dark-mode .form-field textarea::placeholder {
+  color: #7a7a7a;
+}
+
+body.dark-mode .form-field input:focus,
+body.dark-mode .form-field textarea:focus {
+  border-color: #83c5be;
+  box-shadow: 0 0 0 3px rgba(131, 197, 190, 0.2);
+}
+
+body.dark-mode .field-value {
+  background: #16213e;
+  color: #e0e0e0;
+  border: 1px solid #2a3f5f;
+}
+
+body.dark-mode .cancel-btn {
+  background: #16213e;
+  color: #b0b0b0;
+  border: 1px solid #2a3f5f;
+}
+
+body.dark-mode .cancel-btn:hover {
+  background: #1f2f4f;
+  color: #e0e0e0;
+}
+
+body.dark-mode .password-error {
+  background: #3d1a1a;
+  color: #ff6b6b;
+  border-left-color: #dc3545;
+}
+
+body.dark-mode .password-success {
+  background: #1a3d2e;
+  color: #4caf50;
+  border-left-color: #28a745;
+}
+
+body.dark-mode .save-btn {
+  background: linear-gradient(135deg, #006d77 0%, #83c5be 100%);
+}
+
+body.dark-mode .edit-btn:hover,
+body.dark-mode .change-password-btn:hover,
+body.dark-mode .save-btn:hover {
+  box-shadow: 0 6px 20px rgba(0, 109, 119, 0.3);
+}
