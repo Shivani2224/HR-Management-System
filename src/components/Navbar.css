@@ -252,6 +252,46 @@
   background: #fee;
 }
 
+/* Dark Mode Styles for Profile Dropdown */
+body.dark-mode .profile-dropdown {
+  background: #0f3460;
+  border: 1px solid #2a3f5f;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .profile-header {
+  border-bottom-color: #2a3f5f;
+}
+
+body.dark-mode .profile-name-large {
+  color: #e0e0e0;
+}
+
+body.dark-mode .profile-role-large {
+  color: #b0b0b0;
+}
+
+body.dark-mode .profile-divider {
+  background: #2a3f5f;
+}
+
+body.dark-mode .profile-dropdown a {
+  color: #e0e0e0;
+}
+
+body.dark-mode .profile-dropdown a:hover {
+  background: #16213e;
+  color: #83c5be;
+}
+
+body.dark-mode .logout-btn {
+  color: #ff6b6b;
+}
+
+body.dark-mode .logout-btn:hover {
+  background: #3d1a1a;
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 0 15px;
