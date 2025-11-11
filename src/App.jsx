@@ -15,7 +15,6 @@ import Payslips from './components/Payslips'
 import Profile from './components/Profile'
 import TimeCorrection from './components/TimeCorrection'
 import TimeCorrectionApproval from './components/TimeCorrectionApproval'
-import './App.css'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -25,12 +24,12 @@ function App() {
     return saved === 'true'
   })
 
-  // Apply dark mode class to body
+  // Apply dark mode class to document root
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add('dark-mode')
+      document.documentElement.classList.add('dark')
     } else {
-      document.body.classList.remove('dark-mode')
+      document.documentElement.classList.remove('dark')
     }
     localStorage.setItem('darkMode', darkMode)
   }, [darkMode])
@@ -54,7 +53,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className={`min-h-screen ${user ? 'bg-[#f5f6fa] dark:bg-[#16213e]' : 'flex justify-center items-center p-5'}`}>
       {!user ? (
         <Login onLogin={handleLogin} />
       ) : (
@@ -67,7 +66,7 @@ function App() {
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
           />
-          <div className="main-content">
+          <div className="p-[30px] max-w-[1400px] mx-auto">
             {user.role === 'employee' && (
               <>
                 {currentView === 'dashboard' && <EmployeeDashboard user={user} />}
@@ -76,7 +75,6 @@ function App() {
                 {currentView === 'time-correction' && <TimeCorrection username={user.username} userRole={user.role} />}
                 {currentView === 'payslips' && <Payslips username={user.username} userRole={user.role} />}
                 {currentView === 'profile' && <Profile username={user.username} userRole={user.role} />}
-                {currentView === 'settings' && <Settings userRole={user.role} />}
               </>
             )}
             {user.role === 'manager' && (

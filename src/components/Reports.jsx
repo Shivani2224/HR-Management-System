@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './Reports.css'
 
 function Reports() {
   const [reportType, setReportType] = useState('attendance')

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './Settings.css'
 
 function Settings({ userRole }) {
   const [settings, setSettings] = useState({
@@ -148,18 +147,28 @@ function Settings({ userRole }) {
   }
 
   return (
-    <div className="settings-container">
-      <div className="settings-header">
+    <div className="max-w-6xl mx-auto space-y-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div>
-          <h1>{isEmployee ? 'My Settings' : 'System Settings'}</h1>
-          <p>{isEmployee ? 'View company information and policies' : 'Configure system preferences and policies'}</p>
+          <h1 className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be] mb-2">
+            {isEmployee ? 'My Settings' : 'System Settings'}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {isEmployee ? 'View company information and policies' : 'Configure system preferences and policies'}
+          </p>
         </div>
         {!isEmployee && (
-          <div className="header-actions">
-            <button className="btn-export" onClick={handleExportData}>
+          <div className="flex gap-2">
+            <button
+              className="px-4 py-2 bg-[#e29578] hover:bg-[#d28468] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              onClick={handleExportData}
+            >
               📥 Export Data
             </button>
-            <button className="btn-reset" onClick={handleResetSettings}>
+            <button
+              className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              onClick={handleResetSettings}
+            >
               🔄 Reset to Default
             </button>
           </div>
@@ -167,58 +176,60 @@ function Settings({ userRole }) {
       </div>
 
       {saveMessage && !isEmployee && (
-        <div className="save-message">{saveMessage}</div>
+        <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-400 text-green-700 dark:text-green-400 p-4 rounded-lg">
+          {saveMessage}
+        </div>
       )}
 
       {/* Employee Read-Only Sections */}
       {isEmployee && (
         <>
-          <div className="settings-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Working Hours - Read Only */}
-            <div className="settings-section readonly">
-              <h2>⏰ Working Hours</h2>
-              <div className="info-display">
-                <div className="info-item">
-                  <span className="info-label">Start Time</span>
-                  <span className="info-value">{settings.workingHours.start}</span>
+            <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">⏰ Working Hours</h2>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300 font-semibold">Start Time</span>
+                  <span className="text-[#006d77] dark:text-[#83c5be] font-bold">{settings.workingHours.start}</span>
                 </div>
-                <div className="info-item">
-                  <span className="info-label">End Time</span>
-                  <span className="info-value">{settings.workingHours.end}</span>
+                <div className="flex justify-between items-center p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
+                  <span className="text-gray-700 dark:text-gray-300 font-semibold">End Time</span>
+                  <span className="text-[#006d77] dark:text-[#83c5be] font-bold">{settings.workingHours.end}</span>
                 </div>
               </div>
             </div>
 
             {/* Remaining Leaves - Read Only */}
-            <div className="settings-section readonly">
-              <h2>📅 Annual Leave Balance</h2>
-              <div className="leave-balance-grid">
-                <div className="leave-balance-item vacation">
-                  <div className="leave-icon">🏖️</div>
-                  <div className="leave-info">
-                    <span className="leave-label">Vacation Days</span>
-                    <span className="leave-value">{getRemainingLeaves().vacation} days</span>
+            <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">📅 Annual Leave Balance</h2>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-lg flex items-center gap-3">
+                  <div className="text-3xl">🏖️</div>
+                  <div className="text-white">
+                    <div className="text-xs opacity-90">Vacation Days</div>
+                    <div className="text-xl font-bold">{getRemainingLeaves().vacation} days</div>
                   </div>
                 </div>
-                <div className="leave-balance-item sick">
-                  <div className="leave-icon">🏥</div>
-                  <div className="leave-info">
-                    <span className="leave-label">Sick Leave</span>
-                    <span className="leave-value">{getRemainingLeaves().sick} days</span>
+                <div className="bg-gradient-to-br from-red-500 to-red-600 p-3 rounded-lg flex items-center gap-3">
+                  <div className="text-3xl">🏥</div>
+                  <div className="text-white">
+                    <div className="text-xs opacity-90">Sick Leave</div>
+                    <div className="text-xl font-bold">{getRemainingLeaves().sick} days</div>
                   </div>
                 </div>
-                <div className="leave-balance-item personal">
-                  <div className="leave-icon">👤</div>
-                  <div className="leave-info">
-                    <span className="leave-label">Personal Days</span>
-                    <span className="leave-value">{getRemainingLeaves().personal} days</span>
+                <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-lg flex items-center gap-3">
+                  <div className="text-3xl">👤</div>
+                  <div className="text-white">
+                    <div className="text-xs opacity-90">Personal Days</div>
+                    <div className="text-xl font-bold">{getRemainingLeaves().personal} days</div>
                   </div>
                 </div>
-                <div className="leave-balance-item total">
-                  <div className="leave-icon">📊</div>
-                  <div className="leave-info">
-                    <span className="leave-label">Total Available</span>
-                    <span className="leave-value">{getRemainingLeaves().total} days</span>
+                <div className="bg-gradient-to-br from-[#006d77] to-[#83c5be] p-3 rounded-lg flex items-center gap-3">
+                  <div className="text-3xl">📊</div>
+                  <div className="text-white">
+                    <div className="text-xs opacity-90">Total Available</div>
+                    <div className="text-xl font-bold">{getRemainingLeaves().total} days</div>
                   </div>
                 </div>
               </div>
@@ -226,25 +237,25 @@ function Settings({ userRole }) {
           </div>
 
           {/* Company Holidays - Read Only */}
-          <div className="settings-section full-width readonly">
-            <h2>🏖️ Company Holidays</h2>
-            <div className="holidays-list">
+          <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+            <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">🏖️ Company Holidays</h2>
+            <div className="space-y-3">
               {settings.holidays.length === 0 ? (
-                <div className="no-holidays">No holidays scheduled yet</div>
+                <div className="text-center p-8 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-500 dark:text-gray-400">
+                  No holidays scheduled yet
+                </div>
               ) : (
                 settings.holidays.map((holiday, index) => (
-                  <div key={index} className="holiday-item readonly">
-                    <div className="holiday-info">
-                      <span className="holiday-name">{holiday.name}</span>
-                      <span className="holiday-date">
-                        {new Date(holiday.date).toLocaleDateString('en-US', {
-                          weekday: 'long',
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </span>
-                    </div>
+                  <div key={index} className="flex justify-between items-center p-4 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg border-l-4 border-[#006d77] dark:border-[#83c5be]">
+                    <span className="font-semibold text-gray-800 dark:text-gray-200">{holiday.name}</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {new Date(holiday.date).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </span>
                   </div>
                 ))
               )}
@@ -255,165 +266,191 @@ function Settings({ userRole }) {
 
       {!isEmployee && (
         <>
-        <div className="settings-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Company Settings */}
-        <div className="settings-section">
-          <h2>Company Settings</h2>
-          <div className="setting-item">
-            <label>Company Name</label>
-            <input
-              type="text"
-              value={settings.companyName}
-              onChange={(e) => handleInputChange(null, 'companyName', e.target.value)}
-              placeholder="Enter company name"
-            />
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Company Settings</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Company Name</label>
+              <input
+                type="text"
+                value={settings.companyName}
+                onChange={(e) => handleInputChange(null, 'companyName', e.target.value)}
+                placeholder="Enter company name"
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
           </div>
         </div>
 
         {/* Working Hours */}
-        <div className="settings-section">
-          <h2>Working Hours</h2>
-          <div className="setting-item">
-            <label>Start Time</label>
-            <input
-              type="time"
-              value={settings.workingHours.start}
-              onChange={(e) => handleInputChange('workingHours', 'start', e.target.value)}
-            />
-          </div>
-          <div className="setting-item">
-            <label>End Time</label>
-            <input
-              type="time"
-              value={settings.workingHours.end}
-              onChange={(e) => handleInputChange('workingHours', 'end', e.target.value)}
-            />
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Working Hours</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Start Time</label>
+              <input
+                type="time"
+                value={settings.workingHours.start}
+                onChange={(e) => handleInputChange('workingHours', 'start', e.target.value)}
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">End Time</label>
+              <input
+                type="time"
+                value={settings.workingHours.end}
+                onChange={(e) => handleInputChange('workingHours', 'end', e.target.value)}
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
           </div>
         </div>
 
         {/* Leave Policies */}
-        <div className="settings-section">
-          <h2>Leave Policies (Days per Year)</h2>
-          <div className="setting-item">
-            <label>Vacation Days</label>
-            <input
-              type="number"
-              min="0"
-              value={settings.leavePolicies.vacation}
-              onChange={(e) => handleInputChange('leavePolicies', 'vacation', parseInt(e.target.value))}
-            />
-          </div>
-          <div className="setting-item">
-            <label>Sick Leave Days</label>
-            <input
-              type="number"
-              min="0"
-              value={settings.leavePolicies.sick}
-              onChange={(e) => handleInputChange('leavePolicies', 'sick', parseInt(e.target.value))}
-            />
-          </div>
-          <div className="setting-item">
-            <label>Personal Days</label>
-            <input
-              type="number"
-              min="0"
-              value={settings.leavePolicies.personal}
-              onChange={(e) => handleInputChange('leavePolicies', 'personal', parseInt(e.target.value))}
-            />
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Leave Policies (Days per Year)</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Vacation Days</label>
+              <input
+                type="number"
+                min="0"
+                value={settings.leavePolicies.vacation}
+                onChange={(e) => handleInputChange('leavePolicies', 'vacation', parseInt(e.target.value))}
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Sick Leave Days</label>
+              <input
+                type="number"
+                min="0"
+                value={settings.leavePolicies.sick}
+                onChange={(e) => handleInputChange('leavePolicies', 'sick', parseInt(e.target.value))}
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Personal Days</label>
+              <input
+                type="number"
+                min="0"
+                value={settings.leavePolicies.personal}
+                onChange={(e) => handleInputChange('leavePolicies', 'personal', parseInt(e.target.value))}
+                className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+              />
+            </div>
           </div>
         </div>
 
         {/* System Preferences */}
-        <div className="settings-section">
-          <h2>System Preferences</h2>
-          <div className="setting-item checkbox">
-            <label>
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">System Preferences</h2>
+          <div className="space-y-4">
+            <div className="flex items-start gap-3 p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
               <input
                 type="checkbox"
                 checked={settings.autoLogoutEnabled}
                 onChange={(e) => handleInputChange(null, 'autoLogoutEnabled', e.target.checked)}
+                className="mt-1 w-4 h-4 text-[#006d77] rounded focus:ring-[#83c5be]"
               />
-              Enable Auto-Logout at Midnight
-            </label>
-            <p className="setting-description">Automatically log out employees at the end of the day</p>
-          </div>
-          <div className="setting-item checkbox">
-            <label>
+              <div className="flex-1">
+                <label className="font-semibold text-gray-800 dark:text-gray-200">Enable Auto-Logout at Midnight</label>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Automatically log out employees at the end of the day</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
               <input
                 type="checkbox"
                 checked={settings.breakRemindersEnabled}
                 onChange={(e) => handleInputChange(null, 'breakRemindersEnabled', e.target.checked)}
+                className="mt-1 w-4 h-4 text-[#006d77] rounded focus:ring-[#83c5be]"
               />
-              Enable Break Reminders
-            </label>
-            <p className="setting-description">Remind employees to take breaks</p>
-          </div>
-          {settings.breakRemindersEnabled && (
-            <div className="setting-item">
-              <label>Break Reminder Interval (minutes)</label>
-              <input
-                type="number"
-                min="30"
-                step="30"
-                value={settings.breakReminderInterval}
-                onChange={(e) => handleInputChange(null, 'breakReminderInterval', parseInt(e.target.value))}
-              />
+              <div className="flex-1">
+                <label className="font-semibold text-gray-800 dark:text-gray-200">Enable Break Reminders</label>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Remind employees to take breaks</p>
+              </div>
             </div>
-          )}
-          <div className="setting-item checkbox">
-            <label>
+            {settings.breakRemindersEnabled && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Break Reminder Interval (minutes)</label>
+                <input
+                  type="number"
+                  min="30"
+                  step="30"
+                  value={settings.breakReminderInterval}
+                  onChange={(e) => handleInputChange(null, 'breakReminderInterval', parseInt(e.target.value))}
+                  className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
+                />
+              </div>
+            )}
+            <div className="flex items-start gap-3 p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
               <input
                 type="checkbox"
                 checked={settings.emailNotifications}
                 onChange={(e) => handleInputChange(null, 'emailNotifications', e.target.checked)}
+                className="mt-1 w-4 h-4 text-[#006d77] rounded focus:ring-[#83c5be]"
               />
-              Enable Email Notifications
-            </label>
-            <p className="setting-description">Send email notifications for important events</p>
-          </div>
-          <div className="setting-item checkbox">
-            <label>
+              <div className="flex-1">
+                <label className="font-semibold text-gray-800 dark:text-gray-200">Enable Email Notifications</label>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Send email notifications for important events</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-3 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
               <input
                 type="checkbox"
                 checked={settings.darkModeDefault}
                 onChange={(e) => handleInputChange(null, 'darkModeDefault', e.target.checked)}
+                className="mt-1 w-4 h-4 text-[#006d77] rounded focus:ring-[#83c5be]"
               />
-              Dark Mode by Default
-            </label>
-            <p className="setting-description">Enable dark mode for new users by default</p>
+              <div className="flex-1">
+                <label className="font-semibold text-gray-800 dark:text-gray-200">Dark Mode by Default</label>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">Enable dark mode for new users by default</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Holidays Section */}
-      <div className="settings-section full-width">
-        <h2>Company Holidays</h2>
-        <div className="holiday-add-section">
+      <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+        <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Company Holidays</h2>
+        <div className="flex flex-col md:flex-row gap-3 mb-6">
           <input
             type="text"
             placeholder="Holiday name"
             value={newHoliday.name}
             onChange={(e) => setNewHoliday(prev => ({ ...prev, name: e.target.value }))}
+            className="flex-1 px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
           />
           <input
             type="date"
             value={newHoliday.date}
             onChange={(e) => setNewHoliday(prev => ({ ...prev, date: e.target.value }))}
+            className="flex-1 px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
           />
-          <button className="btn-add-holiday" onClick={handleAddHoliday}>
+          <button
+            className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all whitespace-nowrap"
+            onClick={handleAddHoliday}
+          >
             + Add Holiday
           </button>
         </div>
 
-        <div className="holidays-list">
+        <div className="space-y-3">
           {settings.holidays.length === 0 ? (
-            <div className="no-holidays">No holidays added yet</div>
+            <div className="text-center p-8 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-500 dark:text-gray-400">
+              No holidays added yet
+            </div>
           ) : (
             settings.holidays.map((holiday, index) => (
-              <div key={index} className="holiday-item">
-                <div className="holiday-info">
-                  <span className="holiday-name">{holiday.name}</span>
-                  <span className="holiday-date">
+              <div key={index} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 p-4 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg border-l-4 border-[#006d77] dark:border-[#83c5be]">
+                <div className="flex-1">
+                  <span className="font-semibold text-gray-800 dark:text-gray-200 block mb-1">{holiday.name}</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
                     {new Date(holiday.date).toLocaleDateString('en-US', {
                       weekday: 'long',
                       year: 'numeric',
@@ -422,7 +459,10 @@ function Settings({ userRole }) {
                     })}
                   </span>
                 </div>
-                <button className="btn-delete-holiday" onClick={() => handleDeleteHoliday(index)}>
+                <button
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold text-sm hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  onClick={() => handleDeleteHoliday(index)}
+                >
                   Delete
                 </button>
               </div>
@@ -435,8 +475,11 @@ function Settings({ userRole }) {
 
       {/* Save Button - Only for Admin/Manager */}
       {!isEmployee && (
-        <div className="settings-footer">
-          <button className="btn-save-settings" onClick={handleSaveSettings}>
+        <div className="flex justify-center pt-6">
+          <button
+            className="px-8 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+            onClick={handleSaveSettings}
+          >
             💾 Save All Settings
           </button>
         </div>

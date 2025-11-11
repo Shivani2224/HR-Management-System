@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './AdminDashboard.css'
 
 function AdminDashboard({ user, onNavigate }) {
   const [stats, setStats] = useState({
@@ -146,140 +145,174 @@ function AdminDashboard({ user, onNavigate }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'status-pending'
-      case 'approved': return 'status-approved'
-      case 'rejected': return 'status-rejected'
+      case 'pending': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300'
+      case 'approved': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
+      case 'rejected': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
       default: return ''
     }
   }
 
   return (
-    <div className="admin-dashboard">
-      <div className="dashboard-header">
+    <div className="min-h-screen bg-[#ffddd2] dark:bg-[#0a1929] p-6">
+      <div className="mb-8">
         <div>
-          <h1>Admin Dashboard</h1>
-          <p>Welcome back, {user.username}! Here's what's happening today.</p>
+          <h1 className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be] mb-2">Admin Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-300">Welcome back, {user.username}! Here's what's happening today.</p>
         </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="stats-grid">
-        <div className="stat-card primary">
-          <div className="stat-icon">👥</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.totalEmployees}</div>
-            <div className="stat-label">Total Employees</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-[#006d77] dark:border-[#83c5be]">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">👥</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be]">{stats.totalEmployees}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Total Employees</div>
+            </div>
           </div>
         </div>
 
-        <div className="stat-card success">
-          <div className="stat-icon">✅</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.activeToday}</div>
-            <div className="stat-label">Active Today</div>
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-green-500">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">✅</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-green-600 dark:text-green-400">{stats.activeToday}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Active Today</div>
+            </div>
           </div>
         </div>
 
-        <div className="stat-card warning">
-          <div className="stat-icon">⏰</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.pendingLeaves}</div>
-            <div className="stat-label">Pending Leaves</div>
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-yellow-500">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">⏰</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-yellow-600 dark:text-yellow-400">{stats.pendingLeaves}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Pending Leaves</div>
+            </div>
           </div>
         </div>
 
-        <div className="stat-card info">
-          <div className="stat-icon">🔄</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.pendingTimeCorrections}</div>
-            <div className="stat-label">Pending Corrections</div>
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">🔄</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.pendingTimeCorrections}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Pending Corrections</div>
+            </div>
           </div>
         </div>
 
-        <div className="stat-card secondary">
-          <div className="stat-icon">📋</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.totalLeaveRequests}</div>
-            <div className="stat-label">Total Leave Requests</div>
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-[#e29578]">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">📋</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-[#e29578] dark:text-[#e29578]">{stats.totalLeaveRequests}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Total Leave Requests</div>
+            </div>
           </div>
         </div>
 
-        <div className="stat-card accent">
-          <div className="stat-icon">📊</div>
-          <div className="stat-details">
-            <div className="stat-value">{stats.totalAttendanceRecords}</div>
-            <div className="stat-label">Attendance Records</div>
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md border-l-4 border-[#83c5be]">
+          <div className="flex items-center justify-between">
+            <div className="text-4xl">📊</div>
+            <div className="text-right">
+              <div className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be]">{stats.totalAttendanceRecords}</div>
+              <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">Attendance Records</div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="quick-actions-section">
-        <h2>Quick Actions</h2>
-        <div className="quick-actions-grid">
-          <button className="action-card" onClick={() => onNavigate('leave-approval')}>
-            <div className="action-icon">📝</div>
-            <div className="action-title">Review Leaves</div>
-            <div className="action-description">Approve or reject leave requests</div>
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left relative"
+            onClick={() => onNavigate('leave-approval')}
+          >
+            <div className="text-4xl mb-3">📝</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Review Leaves</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">Approve or reject leave requests</div>
             {stats.pendingLeaves > 0 && (
-              <div className="action-badge">{stats.pendingLeaves}</div>
+              <div className="absolute top-4 right-4 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                {stats.pendingLeaves}
+              </div>
             )}
           </button>
 
-          <button className="action-card" onClick={() => onNavigate('time-correction-approval')}>
-            <div className="action-icon">⏱️</div>
-            <div className="action-title">Time Corrections</div>
-            <div className="action-description">Review time correction requests</div>
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left relative"
+            onClick={() => onNavigate('time-correction-approval')}
+          >
+            <div className="text-4xl mb-3">⏱️</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Time Corrections</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">Review time correction requests</div>
             {stats.pendingTimeCorrections > 0 && (
-              <div className="action-badge">{stats.pendingTimeCorrections}</div>
+              <div className="absolute top-4 right-4 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                {stats.pendingTimeCorrections}
+              </div>
             )}
           </button>
 
-          <button className="action-card" onClick={() => onNavigate('users')}>
-            <div className="action-icon">👤</div>
-            <div className="action-title">Manage Users</div>
-            <div className="action-description">Add, edit, or remove users</div>
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left"
+            onClick={() => onNavigate('users')}
+          >
+            <div className="text-4xl mb-3">👤</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Manage Users</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">Add, edit, or remove users</div>
           </button>
 
-          <button className="action-card" onClick={() => onNavigate('employees')}>
-            <div className="action-icon">📁</div>
-            <div className="action-title">Employee Directory</div>
-            <div className="action-description">View all employee records</div>
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left"
+            onClick={() => onNavigate('employees')}
+          >
+            <div className="text-4xl mb-3">📁</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Employee Directory</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">View all employee records</div>
           </button>
 
-          <button className="action-card" onClick={() => onNavigate('reports')}>
-            <div className="action-icon">📈</div>
-            <div className="action-title">Reports</div>
-            <div className="action-description">View analytics and reports</div>
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left"
+            onClick={() => onNavigate('reports')}
+          >
+            <div className="text-4xl mb-3">📈</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Reports</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">View analytics and reports</div>
           </button>
 
-          <button className="action-card" onClick={() => onNavigate('settings')}>
-            <div className="action-icon">⚙️</div>
-            <div className="action-title">Settings</div>
-            <div className="action-description">Configure system settings</div>
+          <button
+            className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-left"
+            onClick={() => onNavigate('settings')}
+          >
+            <div className="text-4xl mb-3">⚙️</div>
+            <div className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be] mb-1">Settings</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">Configure system settings</div>
           </button>
         </div>
       </div>
 
-      <div className="dashboard-row">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Activity */}
-        <div className="activity-section">
-          <h2>Recent Activity</h2>
-          <div className="activity-list">
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Recent Activity</h2>
+          <div className="space-y-3">
             {recentActivity.length === 0 ? (
-              <div className="no-activity">No recent activity</div>
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">No recent activity</div>
             ) : (
               recentActivity.map(activity => (
-                <div key={activity.id} className="activity-item">
-                  <div className="activity-avatar">
+                <div key={activity.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#0f3460] rounded-lg">
+                  <div className="w-10 h-10 rounded-full bg-[#006d77] dark:bg-[#83c5be] text-white dark:text-[#0a1929] flex items-center justify-center font-semibold text-lg">
                     {activity.user.charAt(0).toUpperCase()}
                   </div>
-                  <div className="activity-details">
-                    <div className="activity-user">{activity.user}</div>
-                    <div className="activity-action">{activity.action}</div>
-                    <div className="activity-time">{formatDate(activity.time)}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-[#006d77] dark:text-[#83c5be] truncate">{activity.user}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">{activity.action}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{formatDate(activity.time)}</div>
                   </div>
-                  <div className={`activity-status ${getStatusColor(activity.status)}`}>
+                  <div className={`px-2 py-1 rounded text-xs font-semibold ${getStatusColor(activity.status)}`}>
                     {activity.status}
                   </div>
                 </div>
@@ -289,25 +322,27 @@ function AdminDashboard({ user, onNavigate }) {
         </div>
 
         {/* Top Employees */}
-        <div className="top-employees-section">
-          <h2>Top Employees by Hours</h2>
-          <div className="employees-list">
+        <div className="bg-white dark:bg-[#1e3a4f] p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Top Employees by Hours</h2>
+          <div className="space-y-3">
             {topEmployees.length === 0 ? (
-              <div className="no-employees">No attendance data available</div>
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">No attendance data available</div>
             ) : (
               topEmployees.map((emp, index) => (
-                <div key={index} className="employee-item">
-                  <div className="employee-rank">{index + 1}</div>
-                  <div className="employee-avatar">
+                <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#0f3460] rounded-lg">
+                  <div className="w-8 h-8 rounded-full bg-[#e29578] text-white flex items-center justify-center font-bold text-sm">
+                    {index + 1}
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-[#006d77] dark:bg-[#83c5be] text-white dark:text-[#0a1929] flex items-center justify-center font-semibold text-lg">
                     {emp.name.charAt(0).toUpperCase()}
                   </div>
-                  <div className="employee-info">
-                    <div className="employee-name">{emp.name}</div>
-                    <div className="employee-role">{emp.role}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-[#006d77] dark:text-[#83c5be] truncate">{emp.name}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{emp.role}</div>
                   </div>
-                  <div className="employee-stats">
-                    <div className="employee-hours">{emp.totalHours}h</div>
-                    <div className="employee-sessions">{emp.sessions} sessions</div>
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-[#006d77] dark:text-[#83c5be]">{emp.totalHours}h</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">{emp.sessions} sessions</div>
                   </div>
                 </div>
               ))

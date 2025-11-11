@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './LeaveRequest.css'
 
 function LeaveRequest({ username, userRole }) {
   const [leaveType, setLeaveType] = useState('vacation')
@@ -81,11 +80,11 @@ function LeaveRequest({ username, userRole }) {
   const getStatusBadgeClass = (status) => {
     switch (status) {
       case 'approved':
-        return 'status-badge approved'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
       case 'rejected':
-        return 'status-badge rejected'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
       default:
-        return 'status-badge pending'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200'
     }
   }
 
@@ -98,24 +97,24 @@ function LeaveRequest({ username, userRole }) {
   }
 
   return (
-    <div className="leave-request-container">
-      <div className="leave-request-header">
-        <h1>Leave Requests</h1>
-        <p>Submit and manage your leave requests</p>
+    <div className="bg-white dark:bg-[#0f3460] rounded-xl p-8 shadow-lg max-w-4xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold text-[#006d77] dark:text-[#83c5be] mb-6">Leave Requests</h1>
+        <p className="text-gray-600 dark:text-gray-300">Submit and manage your leave requests</p>
       </div>
 
       {/* Submit New Request Form */}
-      <div className="request-form-card">
-        <h2>Submit New Request</h2>
-        <form onSubmit={handleSubmit} className="leave-form">
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="leaveType">Leave Type</label>
+      <div className="bg-[#f8f9fa] dark:bg-[#16213e] p-6 rounded-lg border-2 border-[#e9ecef] dark:border-[#2a3f5f] mb-8">
+        <h2 className="text-xl font-semibold text-[#006d77] dark:text-[#83c5be] mb-4">Submit New Request</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="leaveType" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Leave Type</label>
               <select
                 id="leaveType"
                 value={leaveType}
                 onChange={(e) => setLeaveType(e.target.value)}
-                className="form-input"
+                className="w-full px-4 py-3 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-[#edf6f9] dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77]"
               >
                 <option value="vacation">Vacation Leave</option>
                 <option value="sick">Sick Leave</option>
@@ -127,65 +126,65 @@ function LeaveRequest({ username, userRole }) {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="startDate">Start Date</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Start Date</label>
               <input
                 type="date"
                 id="startDate"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="form-input"
+                className="w-full px-4 py-3 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-[#edf6f9] dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77]"
                 min={new Date().toISOString().split('T')[0]}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="endDate">End Date</label>
+            <div className="space-y-2">
+              <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 dark:text-gray-200">End Date</label>
               <input
                 type="date"
                 id="endDate"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="form-input"
+                className="w-full px-4 py-3 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-[#edf6f9] dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77]"
                 min={startDate || new Date().toISOString().split('T')[0]}
               />
             </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="reason">Reason</label>
+          <div className="space-y-2">
+            <label htmlFor="reason" className="block text-sm font-medium text-gray-700 dark:text-gray-200">Reason</label>
             <textarea
               id="reason"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="form-input form-textarea"
+              className="w-full px-4 py-3 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-[#edf6f9] dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77]"
               rows="4"
               placeholder="Please provide a reason for your leave request..."
             />
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="px-6 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all">
             Submit Request
           </button>
         </form>
       </div>
 
       {/* Request History */}
-      <div className="request-history">
-        <h2>My Leave Requests</h2>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-[#006d77] dark:text-[#83c5be]">My Leave Requests</h2>
         {requests.length === 0 ? (
-          <div className="no-requests">
-            <p>No leave requests submitted yet</p>
+          <div className="bg-[#f8f9fa] dark:bg-[#16213e] p-6 rounded-lg border-2 border-[#e9ecef] dark:border-[#2a3f5f] text-center">
+            <p className="text-gray-600 dark:text-gray-300">No leave requests submitted yet</p>
           </div>
         ) : (
-          <div className="requests-list">
+          <div className="space-y-4">
             {requests.map((request) => (
-              <div key={request.id} className="request-card">
-                <div className="request-header">
-                  <div className="request-type">
-                    <span className="type-icon">📅</span>
-                    <span className="type-text">
+              <div key={request.id} className="bg-[#f8f9fa] dark:bg-[#16213e] p-6 rounded-lg border-2 border-[#e9ecef] dark:border-[#2a3f5f]">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">📅</span>
+                    <span className="text-lg font-semibold text-[#006d77] dark:text-[#83c5be]">
                       {request.type.charAt(0).toUpperCase() + request.type.slice(1)} Leave
                     </span>
                   </div>
@@ -194,25 +193,25 @@ function LeaveRequest({ username, userRole }) {
                   </span>
                 </div>
 
-                <div className="request-details">
-                  <div className="detail-row">
-                    <span className="detail-label">Duration:</span>
-                    <span className="detail-value">
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600 dark:text-gray-400">Duration:</span>
+                    <span className="text-gray-900 dark:text-white">
                       {formatDate(request.startDate)} - {formatDate(request.endDate)}
-                      <span className="days-count"> ({request.days} day{request.days > 1 ? 's' : ''})</span>
+                      <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">({request.days} day{request.days > 1 ? 's' : ''})</span>
                     </span>
                   </div>
 
-                  <div className="detail-row">
-                    <span className="detail-label">Submitted:</span>
-                    <span className="detail-value">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600 dark:text-gray-400">Submitted:</span>
+                    <span className="text-gray-900 dark:text-white">
                       {formatDate(request.submittedDate)}
                     </span>
                   </div>
 
-                  <div className="detail-row">
-                    <span className="detail-label">Reason:</span>
-                    <span className="detail-value reason-text">{request.reason}</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-gray-600 dark:text-gray-400">Reason:</span>
+                    <span className="text-gray-900 dark:text-white">{request.reason}</span>
                   </div>
                 </div>
               </div>

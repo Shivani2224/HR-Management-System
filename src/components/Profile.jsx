@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './Profile.css'
 
 function Profile({ username, userRole }) {
   const [isEditing, setIsEditing] = useState(false)
@@ -170,196 +169,213 @@ function Profile({ username, userRole }) {
   }
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
-        <h1>My Profile</h1>
-        <p>Manage your personal information and view leave balance</p>
+    <div className="max-w-6xl mx-auto space-y-6">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be] mb-2">My Profile</h1>
+        <p className="text-gray-600 dark:text-gray-400">Manage your personal information and view leave balance</p>
       </div>
 
-      <div className="profile-content">
+      <div className="space-y-6">
         {/* Leave Balance Section */}
-        <div className="leave-balance-section">
-          <h2>Leave Balance</h2>
-          <div className="balance-cards">
-            <div className="balance-card vacation">
-              <div className="balance-icon">🏖️</div>
-              <div className="balance-info">
-                <div className="balance-type">Vacation</div>
-                <div className="balance-value">{leaveBalance.vacation} days</div>
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be] mb-4">Leave Balance</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-lg flex items-center gap-4 hover:shadow-lg transition-all">
+              <div className="text-4xl">🏖️</div>
+              <div className="text-white">
+                <div className="text-sm opacity-90">Vacation</div>
+                <div className="text-2xl font-bold">{leaveBalance.vacation} days</div>
               </div>
             </div>
 
-            <div className="balance-card sick">
-              <div className="balance-icon">🤒</div>
-              <div className="balance-info">
-                <div className="balance-type">Sick Leave</div>
-                <div className="balance-value">{leaveBalance.sick} days</div>
+            <div className="bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-lg flex items-center gap-4 hover:shadow-lg transition-all">
+              <div className="text-4xl">🤒</div>
+              <div className="text-white">
+                <div className="text-sm opacity-90">Sick Leave</div>
+                <div className="text-2xl font-bold">{leaveBalance.sick} days</div>
               </div>
             </div>
 
-            <div className="balance-card personal">
-              <div className="balance-icon">📅</div>
-              <div className="balance-info">
-                <div className="balance-type">Personal</div>
-                <div className="balance-value">{leaveBalance.personal} days</div>
+            <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-4 rounded-lg flex items-center gap-4 hover:shadow-lg transition-all">
+              <div className="text-4xl">📅</div>
+              <div className="text-white">
+                <div className="text-sm opacity-90">Personal</div>
+                <div className="text-2xl font-bold">{leaveBalance.personal} days</div>
               </div>
             </div>
 
-            <div className="balance-card total">
-              <div className="balance-icon">📊</div>
-              <div className="balance-info">
-                <div className="balance-type">Total</div>
-                <div className="balance-value">{leaveBalance.total} days</div>
+            <div className="bg-gradient-to-br from-[#006d77] to-[#83c5be] p-4 rounded-lg flex items-center gap-4 hover:shadow-lg transition-all">
+              <div className="text-4xl">📊</div>
+              <div className="text-white">
+                <div className="text-sm opacity-90">Total</div>
+                <div className="text-2xl font-bold">{leaveBalance.total} days</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Profile Information Section */}
-        <div className="profile-info-section">
-          <div className="section-header">
-            <h2>Personal Information</h2>
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be]">Personal Information</h2>
             {!isEditing ? (
-              <button className="edit-btn" onClick={() => setIsEditing(true)}>
+              <button
+                className="px-4 py-2 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                onClick={() => setIsEditing(true)}
+              >
                 ✏️ Edit Profile
               </button>
             ) : (
-              <div className="edit-actions">
-                <button className="save-btn" onClick={handleSave}>
+              <div className="flex gap-2">
+                <button
+                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  onClick={handleSave}
+                >
                   ✓ Save
                 </button>
-                <button className="cancel-btn" onClick={handleCancel}>
+                <button
+                  className="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  onClick={handleCancel}
+                >
                   ✗ Cancel
                 </button>
               </div>
             )}
           </div>
 
-          <div className="profile-form">
-            <div className="form-section">
-              <h3>Basic Information</h3>
-              <div className="form-grid">
-                <div className="form-field">
-                  <label>Full Name</label>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Basic Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="name"
                       value={profileData.name}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.name}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.name}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Email</label>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Email</label>
                   {isEditing ? (
                     <input
                       type="email"
                       name="email"
                       value={profileData.email}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.email}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.email}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Phone Number</label>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
                   {isEditing ? (
                     <input
                       type="tel"
                       name="phone"
                       value={profileData.phone}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.phone}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.phone}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Department</label>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Department</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="department"
                       value={profileData.department}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.department}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.department}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Join Date</label>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Join Date</label>
                   {isEditing ? (
                     <input
                       type="date"
                       name="joinDate"
                       value={profileData.joinDate}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{new Date(profileData.joinDate).toLocaleDateString()}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{new Date(profileData.joinDate).toLocaleDateString()}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Role</label>
-                  <div className="field-value">
-                    <span className="role-badge">{userRole}</span>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Role</label>
+                  <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg">
+                    <span className="px-3 py-1 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-full text-sm font-semibold capitalize">{userRole}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="form-field full-width">
-                <label>Address</label>
+              <div className="mt-4">
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Address</label>
                 {isEditing ? (
                   <textarea
                     name="address"
                     value={profileData.address}
                     onChange={handleInputChange}
                     rows="3"
+                    className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                   />
                 ) : (
-                  <div className="field-value">{profileData.address}</div>
+                  <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.address}</div>
                 )}
               </div>
             </div>
 
-            <div className="form-section">
-              <h3>Emergency Contact</h3>
-              <div className="form-grid">
-                <div className="form-field">
-                  <label>Contact Name</label>
+            <div className="pt-6 border-t border-gray-200 dark:border-[#2a3f5f]">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Emergency Contact</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Contact Name</label>
                   {isEditing ? (
                     <input
                       type="text"
                       name="emergencyContact"
                       value={profileData.emergencyContact}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.emergencyContact}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.emergencyContact}</div>
                   )}
                 </div>
 
-                <div className="form-field">
-                  <label>Contact Phone</label>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Contact Phone</label>
                   {isEditing ? (
                     <input
                       type="tel"
                       name="emergencyPhone"
                       value={profileData.emergencyPhone}
                       onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                     />
                   ) : (
-                    <div className="field-value">{profileData.emergencyPhone}</div>
+                    <div className="px-4 py-2 bg-[#f8f9fa] dark:bg-[#16213e] rounded-lg text-gray-800 dark:text-gray-200">{profileData.emergencyPhone}</div>
                   )}
                 </div>
               </div>
@@ -368,60 +384,66 @@ function Profile({ username, userRole }) {
         </div>
 
         {/* Password Change Section */}
-        <div className="password-change-section">
-          <div className="section-header">
-            <h2>Change Password</h2>
+        <div className="bg-white dark:bg-[#0f3460] rounded-xl p-6 shadow-lg">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-[#006d77] dark:text-[#83c5be]">Change Password</h2>
           </div>
 
-          <div className="password-form">
+          <div className="space-y-4">
             {passwordError && (
-              <div className="password-error">
+              <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 dark:border-red-400 text-red-700 dark:text-red-400 p-4 rounded-lg">
                 {passwordError}
               </div>
             )}
 
             {passwordSuccess && (
-              <div className="password-success">
+              <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-400 text-green-700 dark:text-green-400 p-4 rounded-lg">
                 {passwordSuccess}
               </div>
             )}
 
-            <div className="form-grid">
-              <div className="form-field">
-                <label>Current Password</label>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Current Password</label>
                 <input
                   type="password"
                   name="currentPassword"
                   value={passwordData.currentPassword}
                   onChange={handlePasswordChange}
                   placeholder="Enter current password"
+                  className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                 />
               </div>
 
-              <div className="form-field">
-                <label>New Password</label>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">New Password</label>
                 <input
                   type="password"
                   name="newPassword"
                   value={passwordData.newPassword}
                   onChange={handlePasswordChange}
                   placeholder="Enter new password (min 6 characters)"
+                  className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                 />
               </div>
 
-              <div className="form-field">
-                <label>Confirm New Password</label>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Confirm New Password</label>
                 <input
                   type="password"
                   name="confirmPassword"
                   value={passwordData.confirmPassword}
                   onChange={handlePasswordChange}
                   placeholder="Re-enter new password"
+                  className="w-full px-4 py-2 border-2 border-[#83c5be] dark:border-[rgba(131,197,190,0.3)] rounded-lg bg-white dark:bg-[rgba(22,33,62,0.6)] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#006d77] dark:focus:border-[#83c5be]"
                 />
               </div>
             </div>
 
-            <button className="change-password-btn" onClick={handleChangePassword}>
+            <button
+              className="w-full md:w-auto px-8 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
+              onClick={handleChangePassword}
+            >
               Change Password
             </button>
           </div>

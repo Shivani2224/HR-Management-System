@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './EmployeeDashboard.css'
 
 function EmployeeDashboard({ user }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -205,114 +204,178 @@ function EmployeeDashboard({ user }) {
   }
 
   return (
-    <div className="employee-dashboard">
-      <div className="dashboard-header">
-        <h2>Employee Dashboard</h2>
-        <p>Welcome, {user.username}!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#16213e] dark:to-[#0f3460] p-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-[#006d77] to-[#83c5be] bg-clip-text text-transparent mb-2">
+            Employee Dashboard
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
+            Welcome, {user.username}!
+          </p>
+        </div>
 
-      <div className="dashboard-content">
-        {!isLoggedIn && !sessionSummary && (
-          <div className="action-section">
-            <button className="btn btn-login" onClick={handleLogin}>
-              Login
-            </button>
-          </div>
-        )}
+        <div className="space-y-6">
+          {!isLoggedIn && !sessionSummary && (
+            <div className="flex justify-center">
+              <button
+                className="px-8 py-4 rounded-xl font-bold text-xl bg-gradient-to-r from-[#006d77] to-[#83c5be] text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                onClick={handleLogin}
+              >
+                Login
+              </button>
+            </div>
+          )}
 
-        {isLoggedIn && (
-          <>
-            <div className="time-display">
-              <div className="time-card">
-                <h3>Time Since Login</h3>
-                <p className="time-value">{getElapsedTime()}</p>
+          {isLoggedIn && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white dark:bg-[#0f3460] rounded-xl shadow-lg p-6 border-2 border-gray-200 dark:border-[#2a3f5f]">
+                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
+                    Time Since Login
+                  </h3>
+                  <p className="text-3xl font-bold text-gray-800 dark:text-white">
+                    {getElapsedTime()}
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-[#0f3460] rounded-xl shadow-lg p-6 border-2 border-[#006d77] dark:border-[#83c5be]">
+                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
+                    Work Time
+                  </h3>
+                  <p className="text-3xl font-bold text-[#006d77] dark:text-[#83c5be]">
+                    {getWorkTime()}
+                  </p>
+                </div>
+
+                <div className="bg-white dark:bg-[#0f3460] rounded-xl shadow-lg p-6 border-2 border-[#e29578] dark:border-[#ffddd2]">
+                  <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
+                    Total Break Time
+                  </h3>
+                  <p className="text-3xl font-bold text-[#e29578] dark:text-[#ffddd2]">
+                    {getTotalBreakTime()}
+                  </p>
+                </div>
+
+                {isOnBreak && (
+                  <div className="bg-gradient-to-br from-[#e29578] to-[#ffddd2] dark:from-[#e29578]/80 dark:to-[#ffddd2]/80 rounded-xl shadow-lg p-6 border-2 border-[#e29578]">
+                    <h3 className="text-sm font-semibold text-white mb-2">
+                      Current Break
+                    </h3>
+                    <p className="text-3xl font-bold text-white">
+                      {getCurrentBreakTime()}
+                    </p>
+                  </div>
+                )}
               </div>
 
-              <div className="time-card">
-                <h3>Work Time</h3>
-                <p className="time-value work">{getWorkTime()}</p>
-              </div>
+              <div className="flex justify-center gap-4">
+                {!isOnBreak ? (
+                  <button
+                    className="px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-[#e29578] to-[#ffddd2] text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                    onClick={handleBreakIn}
+                  >
+                    Break In
+                  </button>
+                ) : (
+                  <button
+                    className="px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-[#006d77] to-[#83c5be] text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                    onClick={handleBreakOut}
+                  >
+                    Break Out
+                  </button>
+                )}
 
-              <div className="time-card">
-                <h3>Total Break Time</h3>
-                <p className="time-value break">{getTotalBreakTime()}</p>
+                <button
+                  className="px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
               </div>
 
               {isOnBreak && (
-                <div className="time-card current-break">
-                  <h3>Current Break</h3>
-                  <p className="time-value">{getCurrentBreakTime()}</p>
+                <div className="bg-gradient-to-r from-[#e29578] to-[#ffddd2] text-white text-center py-3 px-6 rounded-xl font-semibold text-lg shadow-lg">
+                  Currently on Break
                 </div>
               )}
-            </div>
+            </>
+          )}
 
-            <div className="action-section">
-              {!isOnBreak ? (
-                <button className="btn btn-break-in" onClick={handleBreakIn}>
-                  Break In
-                </button>
-              ) : (
-                <button className="btn btn-break-out" onClick={handleBreakOut}>
-                  Break Out
-                </button>
-              )}
-
-              <button className="btn btn-logout" onClick={handleLogout}>
-                Logout
+          {sessionSummary && (
+            <div className="bg-white dark:bg-[#0f3460] rounded-xl shadow-lg p-8 border-2 border-[#006d77] dark:border-[#83c5be]">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                Session Summary
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-[#16213e] rounded-lg">
+                  <span className="text-gray-600 dark:text-gray-400 font-semibold">
+                    Total Work Time:
+                  </span>
+                  <span className="text-xl font-bold text-[#006d77] dark:text-[#83c5be]">
+                    {sessionSummary.totalWorked}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-[#16213e] rounded-lg">
+                  <span className="text-gray-600 dark:text-gray-400 font-semibold">
+                    Total Break Time:
+                  </span>
+                  <span className="text-xl font-bold text-[#e29578]">
+                    {sessionSummary.totalBreak}
+                  </span>
+                </div>
+              </div>
+              <button
+                className="w-full px-6 py-3 rounded-lg font-bold text-lg bg-gradient-to-r from-[#006d77] to-[#83c5be] text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                onClick={handleLogin}
+              >
+                Start New Session
               </button>
             </div>
+          )}
 
-            {isOnBreak && (
-              <div className="status-badge on-break">
-                Currently on Break
-              </div>
-            )}
-          </>
-        )}
-
-        {sessionSummary && (
-          <div className="session-summary">
-            <h3>Session Summary</h3>
-            <div className="summary-details">
-              <div className="summary-item">
-                <span className="label">Total Work Time:</span>
-                <span className="value">{sessionSummary.totalWorked}</span>
-              </div>
-              <div className="summary-item">
-                <span className="label">Total Break Time:</span>
-                <span className="value">{sessionSummary.totalBreak}</span>
-              </div>
-            </div>
-            <button className="btn btn-login" onClick={handleLogin}>
-              Start New Session
-            </button>
-          </div>
-        )}
-
-        {/* Login History */}
-        {loginHistory.length > 0 && (
-          <div className="login-history">
-            <h3>Recent Login History</h3>
-            <div className="history-table">
-              <div className="table-header">
-                <div className="col">Date</div>
-                <div className="col">Login Time</div>
-                <div className="col">Logout Time</div>
-                <div className="col">Work Hours</div>
-                <div className="col">Break Time</div>
-              </div>
-              {loginHistory.map((session) => (
-                <div key={session.id} className="table-row">
-                  <div className="col date">{formatDate(session.date)}</div>
-                  <div className="col">{formatDateTime(session.loginTime)}</div>
-                  <div className="col">{formatDateTime(session.logoutTime)}</div>
-                  <div className="col work-time">{session.totalWorked}</div>
-                  <div className="col break-time">{session.totalBreak}</div>
+          {/* Login History */}
+          {loginHistory.length > 0 && (
+            <div className="bg-white dark:bg-[#0f3460] rounded-xl shadow-lg p-6 border-2 border-gray-200 dark:border-[#2a3f5f]">
+              <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+                Recent Login History
+              </h3>
+              <div className="overflow-x-auto">
+                <div className="min-w-full">
+                  <div className="grid grid-cols-5 gap-4 p-4 bg-gradient-to-r from-[#006d77] to-[#83c5be] text-white font-bold rounded-t-lg">
+                    <div>Date</div>
+                    <div>Login Time</div>
+                    <div>Logout Time</div>
+                    <div>Work Hours</div>
+                    <div>Break Time</div>
+                  </div>
+                  {loginHistory.map((session) => (
+                    <div
+                      key={session.id}
+                      className="grid grid-cols-5 gap-4 p-4 border-b border-gray-200 dark:border-[#2a3f5f] hover:bg-gray-50 dark:hover:bg-[#16213e] transition-colors"
+                    >
+                      <div className="font-semibold text-gray-800 dark:text-white">
+                        {formatDate(session.date)}
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">
+                        {formatDateTime(session.loginTime)}
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">
+                        {formatDateTime(session.logoutTime)}
+                      </div>
+                      <div className="font-semibold text-[#006d77] dark:text-[#83c5be]">
+                        {session.totalWorked}
+                      </div>
+                      <div className="font-semibold text-[#e29578]">
+                        {session.totalBreak}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )

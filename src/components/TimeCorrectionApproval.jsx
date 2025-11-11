@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './TimeCorrectionApproval.css'
 
 function TimeCorrectionApproval({ userRole }) {
   const [requests, setRequests] = useState([])
@@ -126,11 +125,11 @@ function TimeCorrectionApproval({ userRole }) {
   const getStatusBadgeClass = (status) => {
     switch (status) {
       case 'approved':
-        return 'status-badge approved'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
       case 'rejected':
-        return 'status-badge rejected'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
       default:
-        return 'status-badge pending'
+        return 'px-4 py-2 rounded-full text-sm font-semibold bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200'
     }
   }
 
@@ -144,58 +143,58 @@ function TimeCorrectionApproval({ userRole }) {
   const rejectedCount = requests.filter(req => req.status === 'rejected').length
 
   return (
-    <div className="correction-approval-container">
-      <div className="correction-approval-header">
-        <h1>Time Correction Approval</h1>
-        <p>Review and approve time correction requests</p>
+    <div className="bg-white dark:bg-[#0f3460] rounded-xl p-8 shadow-lg max-w-6xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold text-[#006d77] dark:text-[#83c5be] mb-6">Time Correction Approval</h1>
+        <p className="text-gray-600 dark:text-gray-300">Review and approve time correction requests</p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="filter-tabs">
+      <div className="flex gap-2 mb-6">
         <button
-          className={filter === 'pending' ? 'filter-tab active' : 'filter-tab'}
+          className={filter === 'pending' ? 'px-6 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all' : 'px-6 py-3 bg-[#f8f9fa] dark:bg-[#16213e] text-gray-700 dark:text-gray-200 rounded-lg font-semibold border-2 border-[#e9ecef] dark:border-[#2a3f5f] hover:border-[#006d77] transition-all'}
           onClick={() => setFilter('pending')}
         >
-          Pending <span className="count-badge">{pendingCount}</span>
+          Pending <span className="ml-2 px-2 py-1 bg-white dark:bg-[#0f3460] rounded-full text-xs">{pendingCount}</span>
         </button>
         <button
-          className={filter === 'approved' ? 'filter-tab active' : 'filter-tab'}
+          className={filter === 'approved' ? 'px-6 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all' : 'px-6 py-3 bg-[#f8f9fa] dark:bg-[#16213e] text-gray-700 dark:text-gray-200 rounded-lg font-semibold border-2 border-[#e9ecef] dark:border-[#2a3f5f] hover:border-[#006d77] transition-all'}
           onClick={() => setFilter('approved')}
         >
-          Approved <span className="count-badge">{approvedCount}</span>
+          Approved <span className="ml-2 px-2 py-1 bg-white dark:bg-[#0f3460] rounded-full text-xs">{approvedCount}</span>
         </button>
         <button
-          className={filter === 'rejected' ? 'filter-tab active' : 'filter-tab'}
+          className={filter === 'rejected' ? 'px-6 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all' : 'px-6 py-3 bg-[#f8f9fa] dark:bg-[#16213e] text-gray-700 dark:text-gray-200 rounded-lg font-semibold border-2 border-[#e9ecef] dark:border-[#2a3f5f] hover:border-[#006d77] transition-all'}
           onClick={() => setFilter('rejected')}
         >
-          Rejected <span className="count-badge">{rejectedCount}</span>
+          Rejected <span className="ml-2 px-2 py-1 bg-white dark:bg-[#0f3460] rounded-full text-xs">{rejectedCount}</span>
         </button>
         <button
-          className={filter === 'all' ? 'filter-tab active' : 'filter-tab'}
+          className={filter === 'all' ? 'px-6 py-3 bg-gradient-to-br from-[#006d77] to-[#83c5be] text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all' : 'px-6 py-3 bg-[#f8f9fa] dark:bg-[#16213e] text-gray-700 dark:text-gray-200 rounded-lg font-semibold border-2 border-[#e9ecef] dark:border-[#2a3f5f] hover:border-[#006d77] transition-all'}
           onClick={() => setFilter('all')}
         >
-          All <span className="count-badge">{requests.length}</span>
+          All <span className="ml-2 px-2 py-1 bg-white dark:bg-[#0f3460] rounded-full text-xs">{requests.length}</span>
         </button>
       </div>
 
       {/* Requests List */}
-      <div className="approval-requests-list">
+      <div className="space-y-4">
         {filteredRequests.length === 0 ? (
-          <div className="no-requests">
-            <p>No {filter !== 'all' ? filter : ''} time correction requests</p>
+          <div className="bg-[#f8f9fa] dark:bg-[#16213e] p-6 rounded-lg border-2 border-[#e9ecef] dark:border-[#2a3f5f] text-center">
+            <p className="text-gray-600 dark:text-gray-300">No {filter !== 'all' ? filter : ''} time correction requests</p>
           </div>
         ) : (
-          <div className="requests-grid">
+          <div className="grid gap-4">
             {filteredRequests.map((request) => (
-              <div key={request.id} className="approval-request-card">
-                <div className="request-card-header">
-                  <div className="employee-info">
-                    <div className="employee-avatar">
+              <div key={request.id} className="bg-[#f8f9fa] dark:bg-[#16213e] p-6 rounded-lg border-2 border-[#e9ecef] dark:border-[#2a3f5f]">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#006d77] to-[#83c5be] flex items-center justify-center text-white font-bold text-xl">
                       {request.username.charAt(0).toUpperCase()}
                     </div>
-                    <div className="employee-details">
-                      <span className="employee-name">{request.username}</span>
-                      <span className="employee-role">{request.userRole}</span>
+                    <div>
+                      <span className="block font-semibold text-gray-900 dark:text-white">{request.username}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{request.userRole}</span>
                     </div>
                   </div>
                   <span className={getStatusBadgeClass(request.status)}>
@@ -203,83 +202,76 @@ function TimeCorrectionApproval({ userRole }) {
                   </span>
                 </div>
 
-                <div className="request-info">
-                  <div className="info-item full-width">
-                    <span className="info-label">Date:</span>
-                    <span className="info-value">{formatDate(request.originalRecord.date)}</span>
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Date:</span>
+                    <span className="ml-2 text-gray-900 dark:text-white font-medium">{formatDate(request.originalRecord.date)}</span>
                   </div>
 
-                  <div className="time-comparison">
-                    <div className="comparison-section">
-                      <h4>Original Times</h4>
-                      <div className="time-details">
-                        <div className="time-row">
-                          <span>Login:</span>
-                          <span>{formatDateTime(request.originalRecord.loginTime)}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-white dark:bg-[#0f3460] rounded-lg">
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Original Times</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">Login:</span>
+                          <span className="text-sm text-gray-900 dark:text-white">{formatDateTime(request.originalRecord.loginTime)}</span>
                         </div>
-                        <div className="time-row">
-                          <span>Logout:</span>
-                          <span>{formatDateTime(request.originalRecord.logoutTime)}</span>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">Logout:</span>
+                          <span className="text-sm text-gray-900 dark:text-white">{formatDateTime(request.originalRecord.logoutTime)}</span>
                         </div>
-                        <div className="time-row work-time">
-                          <span>Work Time:</span>
-                          <span>{request.originalRecord.totalWorked}</span>
+                        <div className="flex justify-between pt-2 border-t border-[#e9ecef] dark:border-[#2a3f5f]">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">Work Time:</span>
+                          <span className="text-sm text-[#006d77] dark:text-[#83c5be] font-semibold">{request.originalRecord.totalWorked}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="arrow-separator">→</div>
-
-                    <div className="comparison-section requested">
-                      <h4>Requested Times</h4>
-                      <div className="time-details">
-                        <div className="time-row">
-                          <span>Login:</span>
-                          <span>{formatDateTime(request.newLoginTime)}</span>
+                    <div className="border-l-2 border-[#83c5be] pl-6">
+                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Requested Times</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">Login:</span>
+                          <span className="text-sm text-gray-900 dark:text-white">{formatDateTime(request.newLoginTime)}</span>
                         </div>
-                        <div className="time-row">
-                          <span>Logout:</span>
-                          <span>{formatDateTime(request.newLogoutTime)}</span>
+                        <div className="flex justify-between">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">Logout:</span>
+                          <span className="text-sm text-gray-900 dark:text-white">{formatDateTime(request.newLogoutTime)}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="info-item full-width reason-section">
-                    <span className="info-label">Reason:</span>
-                    <span className="info-value reason-text">{request.reason}</span>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                    <span className="font-semibold text-gray-900 dark:text-white">Reason:</span>
+                    <span className="ml-2 text-gray-700 dark:text-gray-300">{request.reason}</span>
                   </div>
 
                   {request.rejectionReason && (
-                    <div className="info-item full-width rejection-reason">
-                      <span className="info-label">Rejection Reason:</span>
-                      <span className="info-value">{request.rejectionReason}</span>
+                    <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                      <span className="font-semibold text-gray-900 dark:text-white">Rejection Reason:</span>
+                      <span className="ml-2 text-gray-700 dark:text-gray-300">{request.rejectionReason}</span>
                     </div>
                   )}
 
-                  <div className="info-item">
-                    <span className="info-label">Submitted:</span>
-                    <span className="info-value">{formatDate(request.submittedDate)}</span>
+                  <div className="flex justify-between text-sm pt-3 border-t border-[#e9ecef] dark:border-[#2a3f5f]">
+                    <span className="text-gray-600 dark:text-gray-400">Submitted: {formatDate(request.submittedDate)}</span>
+                    {request.reviewedDate && (
+                      <span className="text-gray-600 dark:text-gray-400">Reviewed: {formatDate(request.reviewedDate)}</span>
+                    )}
                   </div>
-
-                  {request.reviewedDate && (
-                    <div className="info-item">
-                      <span className="info-label">Reviewed:</span>
-                      <span className="info-value">{formatDate(request.reviewedDate)}</span>
-                    </div>
-                  )}
                 </div>
 
                 {request.status === 'pending' && (
-                  <div className="action-buttons">
+                  <div className="flex gap-3 pt-4 mt-4 border-t-2 border-[#e9ecef] dark:border-[#2a3f5f]">
                     <button
-                      className="approve-btn"
+                      className="flex-1 px-6 py-3 bg-gradient-to-br from-green-600 to-green-500 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
                       onClick={() => handleApprove(request)}
                     >
                       ✓ Approve
                     </button>
                     <button
-                      className="reject-btn"
+                      className="flex-1 px-6 py-3 bg-gradient-to-br from-red-600 to-red-500 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all"
                       onClick={() => handleReject(request)}
                     >
                       ✗ Reject

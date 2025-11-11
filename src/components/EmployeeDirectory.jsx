@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './EmployeeDirectory.css'
 
 function EmployeeDirectory() {
   const [employees, setEmployees] = useState([])
